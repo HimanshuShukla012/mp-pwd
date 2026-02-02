@@ -782,16 +782,17 @@ export default function Dashboard({ role }: { role: Role }) {
                     fillOpacity={1}
                     fill="url(#colorFinancial)"
                   />
-                  {content.progressData[0].target !== undefined && (
-                    <Line
-                      type="monotone"
-                      dataKey="target"
-                      stroke="#f59e0b"
-                      strokeWidth={2}
-                      strokeDasharray="5 5"
-                      dot={false}
-                    />
-                  )}
+                  {"target" in content.progressData[0] && (
+  <Line
+    type="monotone"
+    dataKey="target"
+    stroke="#f59e0b"
+    strokeWidth={2}
+    strokeDasharray="5 5"
+    dot={false}
+  />
+)}
+
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -837,8 +838,9 @@ export default function Dashboard({ role }: { role: Role }) {
                     cy="50%"
                     labelLine={false}
                     label={({ name, percent }) =>
-                      `${name}: ${(percent * 100).toFixed(0)}%`
-                    }
+  `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`
+}
+
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
@@ -931,9 +933,7 @@ export default function Dashboard({ role }: { role: Role }) {
                     fill="#10b981"
                     radius={[8, 8, 0, 0]}
                   />
-                  {content.corridorData[0][
-                    Object.keys(content.corridorData[0])[3]
-                  ] !== undefined && (
+                  {(content.corridorData[0] as any)[Object.keys(content.corridorData[0])[3]] !== undefined && (
                     <Bar
                       dataKey={Object.keys(content.corridorData[0])[3]}
                       fill="#f59e0b"

@@ -5,6 +5,8 @@ export default function FormField({
   label,
   type = 'text',
   value,
+  defaultValue,
+  step,
   onChange,
   placeholder,
   required = false,
@@ -14,9 +16,12 @@ export default function FormField({
   helperText,
   disabled = false,
 }: {
+
   label: string;
-  type?: 'text' | 'number' | 'date' | 'select' | 'textarea' | 'file' | 'email' | 'tel';
+  type?: React.HTMLInputTypeAttribute | "select" | "textarea";
   value?: string | number;
+  defaultValue?: string | number;
+  step?: string | number;
   onChange?: (value: string) => void;
   placeholder?: string;
   required?: boolean;
@@ -26,6 +31,7 @@ export default function FormField({
   helperText?: string;
   disabled?: boolean;
 }) {
+
   const [isFocused, setIsFocused] = useState(false);
   const [fileName, setFileName] = useState<string>('');
 
@@ -89,8 +95,9 @@ export default function FormField({
       {type === 'select' ? (
         <div style={{ position: 'relative' }}>
           <select
-            value={value}
-            onChange={(e) => onChange?.(e.target.value)}
+  value={value}
+  defaultValue={defaultValue}
+  onChange={(e) => onChange?.(e.target.value)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             disabled={disabled}
@@ -125,21 +132,22 @@ export default function FormField({
         </div>
       ) : type === 'textarea' ? (
         <textarea
-          value={value}
-          onChange={(e) => onChange?.(e.target.value)}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
-          rows={rows || 4}
-          disabled={disabled}
-          style={{
-            ...baseInputStyle,
-            resize: 'vertical',
-            minHeight: '100px',
-            fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-          }}
-          required={required}
-        />
+  value={value}
+  defaultValue={defaultValue}
+  onChange={(e) => onChange?.(e.target.value)}
+  onFocus={() => setIsFocused(true)}
+  onBlur={() => setIsFocused(false)}
+  placeholder={placeholder}
+  rows={rows || 4}
+  disabled={disabled}
+  style={{
+    ...baseInputStyle,
+    resize: 'vertical',
+    minHeight: '100px',
+  }}
+  required={required}
+/>
+
       ) : type === 'file' ? (
         <div>
           <input
@@ -229,16 +237,19 @@ export default function FormField({
         </div>
       ) : (
         <input
-          type={type}
-          value={value}
-          onChange={(e) => onChange?.(e.target.value)}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
-          disabled={disabled}
-          style={baseInputStyle}
-          required={required}
-        />
+  type={type}
+  value={value}
+  defaultValue={defaultValue}
+  step={step}
+  onChange={(e) => onChange?.(e.target.value)}
+  onFocus={() => setIsFocused(true)}
+  onBlur={() => setIsFocused(false)}
+  placeholder={placeholder}
+  disabled={disabled}
+  style={baseInputStyle}
+  required={required}
+/>
+
       )}
 
       {/* Error Message */}
