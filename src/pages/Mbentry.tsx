@@ -497,7 +497,6 @@ export default function MBEntry({ role }: { role: Role }) {
                                 : "#92400e",
                         textTransform: "uppercase",
                         letterSpacing: "0.5px",
-                        fontSize: "11px",
                       }}
                     >
                       {entry.status}

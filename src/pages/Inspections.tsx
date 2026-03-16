@@ -652,7 +652,6 @@ export default function Inspections({ role }: { role: Role }) {
                       color: defect.rectificationStatus.includes('Rectified') ? '#065f46' : defect.rectificationStatus === 'In Progress' ? '#92400e' : '#991b1b',
                       textTransform: 'uppercase',
                       letterSpacing: '0.5px',
-                      fontSize: '11px'
                     }}>
                       {defect.rectificationStatus}
                     </span>

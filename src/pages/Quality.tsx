@@ -966,12 +966,12 @@ export default function Quality({ role }: { role: Role }) {
           selectedItem?.ncrNo ? (
             selectedItem.status === 'Rectified - Pending Verification' ? (
               <>
-                <ModalButton variant="danger" onClick={() => handleNCR('verify')}>
-                  Return for Re-work
-                </ModalButton>
-                <ModalButton variant="success" onClick={() => handleNCR('close')}>
-                  ✓ Verify & Close NCR
-                </ModalButton>
+                <ModalButton variant="secondary" onClick={() => handleNCR('verify')}>
+  Return for Re-work
+</ModalButton>
+<ModalButton variant="success" onClick={() => handleNCR('close')}>
+  ✓ Verify & Close NCR
+</ModalButton>
               </>
             ) : null
           ) : (

@@ -2011,7 +2011,8 @@ export default function Projects({ role }: { role: Role }) {
             <button
               onClick={() => {
                 setIsViewTenderDetailsOpen(false);
-                setselectedTender(null);
+                setSelectedTender(null);
+
               }}
               style={{
                 width: "100%",
