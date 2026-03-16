@@ -589,7 +589,6 @@ export default function Quality({ role }: { role: Role }) {
                       color: ncr.status.includes('Rectified') ? '#065f46' : ncr.status.includes('Pending') ? '#991b1b' : '#92400e',
                       textTransform: 'uppercase',
                       letterSpacing: '0.5px',
-                      fontSize: '11px'
                     }}>
                       {ncr.status}
                     </span>
