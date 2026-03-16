@@ -29,7 +29,7 @@ import {
   ArrowDownRight,
 } from "lucide-react";
 
-export default function Dashboard({ role }: { role: Role }) {
+export default function Dashboard({ role, onNavigate }: { role: Role; onNavigate?: (page: string) => void }) {
   const [selectedFY, setSelectedFY] = useState("2024-25");
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [viewMode, setViewMode] = useState<"overview" | "detailed">("overview");
@@ -88,7 +88,7 @@ export default function Dashboard({ role }: { role: Role }) {
               icon: "🎯",
             },
             {
-              label: "Active Packages",
+              label: "Active Tenders",
               value: "24",
               unit: "nos",
               trend: "+3",
@@ -333,8 +333,192 @@ export default function Dashboard({ role }: { role: Role }) {
             },
           ],
         };
+      
+      case 'JE':
+  return {
+    title: 'Site Engineer Dashboard',
+    subtitle: 'Daily site operations, measurements, and work logs',
+    kpiCards: [
+      {
+        label: 'Daily Logs This Month',
+        value: '30',
+        unit: 'nos',
+        trend: '+30',
+        isPositive: true,
+        color: '#a855f7',
+        bgGradient: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)',
+        icon: '📋',
+      },
+      {
+        label: 'MB Entries Pending',
+        value: '1',
+        unit: 'draft',
+        trend: 'Needs submission',
+        isPositive: false,
+        color: '#ec4899',
+        bgGradient: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+        icon: '📐',
+      },
+      {
+        label: 'MB Entries Verified',
+        value: '24',
+        unit: 'this month',
+        trend: '+24',
+        isPositive: true,
+        color: '#10b981',
+        bgGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+        icon: '✓',
+      },
+      {
+        label: 'Site Inspections',
+        value: '18',
+        unit: 'this month',
+        trend: '+18',
+        isPositive: true,
+        color: '#3b82f6',
+        bgGradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+        icon: '🔍',
+      },
+    ],
+    progressData: [
+      { week: 'W1', dailyLogs: 6, mbEntries: 4, inspections: 3 },
+      { week: 'W2', dailyLogs: 7, mbEntries: 5, inspections: 4 },
+      { week: 'W3', dailyLogs: 6, mbEntries: 6, inspections: 5 },
+      { week: 'W4', dailyLogs: 7, mbEntries: 5, inspections: 4 },
+      { week: 'W5', dailyLogs: 4, mbEntries: 4, inspections: 2 },
+    ],
+    pieData: [
+      { name: 'Daily Logs Submitted', value: 30, color: '#a855f7' },
+      { name: 'MB Entries Verified', value: 24, color: '#10b981' },
+      { name: 'MB Entries Pending', value: 1, color: '#f59e0b' },
+    ],
+    corridorData: [
+      { section: 'CH 0-5 km', dailyLogs: 22, mbEntries: 18, quality: 95 },
+      { section: 'CH 5-10 km', dailyLogs: 20, mbEntries: 16, quality: 92 },
+      { section: 'CH 10-15 km', dailyLogs: 18, mbEntries: 14, quality: 88 },
+    ],
+    alerts: [
+      {
+        type: 'critical',
+        message: 'Daily log for 2nd Feb not submitted yet',
+        priority: 'High',
+      },
+      {
+        type: 'warning',
+        message: 'MB Entry MB-2024-158 in draft - submit for verification',
+        priority: 'High',
+      },
+      {
+        type: 'info',
+        message: 'Site inspection scheduled for tomorrow at 10 AM',
+        priority: 'Medium',
+      },
+      {
+        type: 'info',
+        message: 'Quality test results pending for material approval',
+        priority: 'Low',
+      },
+    ],
+  };
+      // Add this case in your getDashboardContent() switch statement, BEFORE the default case:
 
-      // Add other roles here with similar bright color schemes...
+case 'CONTRACTOR':
+  return {
+    title: 'My Work Dashboard',
+    subtitle: 'Track your tenders, submissions, and pending actions',
+    kpiCards: [
+      {
+        label: 'My Active Tenders',
+        value: '3',
+        unit: 'nos',
+        trend: '+0',
+        isPositive: true,
+        color: '#14b8a6',
+        bgGradient: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+        icon: '📋',
+      },
+      {
+        label: 'Pending Bills',
+        value: '2',
+        unit: 'nos',
+        trend: '₹185 Cr',
+        isPositive: false,
+        color: '#f59e0b',
+        bgGradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+        icon: '💰',
+      },
+      {
+        label: 'Daily Logs This Month',
+        value: '30',
+        unit: 'nos',
+        trend: '+30',
+        isPositive: true,
+        color: '#8b5cf6',
+        bgGradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+        icon: '📝',
+      },
+      {
+        label: 'Pending Approvals',
+        value: '4',
+        unit: 'items',
+        trend: 'Action needed',
+        isPositive: false,
+        color: '#ef4444',
+        bgGradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+        icon: '⏳',
+      },
+    ],
+    progressData: [
+      { month: 'Apr', submitted: 28, approved: 26, pending: 2 },
+      { month: 'May', submitted: 30, approved: 28, pending: 2 },
+      { month: 'Jun', submitted: 29, approved: 27, pending: 2 },
+      { month: 'Jul', submitted: 31, approved: 29, pending: 2 },
+      { month: 'Aug', submitted: 30, approved: 28, pending: 2 },
+      { month: 'Sep', submitted: 31, approved: 30, pending: 1 },
+      { month: 'Oct', submitted: 30, approved: 29, pending: 1 },
+      { month: 'Nov', submitted: 31, approved: 30, pending: 1 },
+      { month: 'Dec', submitted: 30, approved: 29, pending: 1 },
+      { month: 'Jan', submitted: 30, approved: 28, pending: 2 },
+    ],
+    pieData: [
+      { name: 'Bills Submitted', value: 15, color: '#3b82f6' },
+      { name: 'Bills Approved', value: 13, color: '#10b981' },
+      { name: 'Bills Pending', value: 2, color: '#f59e0b' },
+    ],
+    corridorData: [
+      { tender: 'PKG-001: Indore-Bhopal', progress: 72, payment: 68, compliance: 92 },
+      { tender: 'PKG-004: Jabalpur-Rewa', progress: 58, payment: 55, compliance: 88 },
+      { tender: 'PKG-007: Gwalior Bypass', progress: 98, payment: 96, compliance: 95 },
+    ],
+    alerts: [
+      {
+        type: 'critical',
+        message: 'Daily log for 2nd Feb not submitted yet',
+        priority: 'High',
+      },
+      {
+        type: 'warning',
+        message: 'Bill PKG-004-RAB-002 under review - action may be needed',
+        priority: 'Medium',
+      },
+      {
+        type: 'warning',
+        message: 'Quality test result approval pending for Bitumen VG-30',
+        priority: 'Medium',
+      },
+      {
+        type: 'info',
+        message: 'Monthly progress report for PKG-001 due on 5th Feb',
+        priority: 'Medium',
+      },
+      {
+        type: 'info',
+        message: 'Safety compliance report due on 7th Feb',
+        priority: 'Low',
+      },
+    ],
+  };
+        // Add other roles here with similar bright color schemes...
       default:
         return {
           title: "Dashboard",
@@ -468,7 +652,11 @@ export default function Dashboard({ role }: { role: Role }) {
             }}
           >
             {fiscalYears.map((fy) => (
-              <option key={fy} value={fy} style={{ background: "#3b82f6", color: "white" }}>
+              <option
+                key={fy}
+                value={fy}
+                style={{ background: "#3b82f6", color: "white" }}
+              >
                 FY {fy}
               </option>
             ))}
@@ -672,20 +860,331 @@ export default function Dashboard({ role }: { role: Role }) {
                   <ArrowDownRight size={16} />
                 )}
                 {kpi.trend}
-                <span style={{ color: "#94a3b8", fontWeight: "500", marginLeft: "4px" }}>
+                <span
+                  style={{
+                    color: "#94a3b8",
+                    fontWeight: "500",
+                    marginLeft: "4px",
+                  }}
+                >
                   vs last month
                 </span>
               </div>
             </div>
           ))}
         </div>
+{/* Quick Actions Section - For CONTRACTOR and JE */}
+{(role === 'CONTRACTOR' || role === 'JE') && (
+  <div style={{
+    background: 'white',
+    borderRadius: '20px',
+    padding: '28px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+    border: '1px solid #e2e8f0',
+    marginBottom: '32px'
+  }}>
+    <h3 style={{
+      margin: '0 0 24px 0',
+      color: '#1e293b',
+      fontSize: '20px',
+      fontWeight: '700',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px'
+    }}>
+      <div style={{
+        width: '4px',
+        height: '24px',
+        background: role === 'JE' 
+          ? 'linear-gradient(180deg, #a855f7, #9333ea)' 
+          : 'linear-gradient(180deg, #14b8a6, #0d9488)',
+        borderRadius: '4px'
+      }} />
+      Quick Actions
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '20px'
+    }}>
+      {role === 'JE' ? (
+        <>
+          {/* JE Quick Actions */}
+          <button
+            onClick={() => onNavigate?.('Daily Logs')}
+            style={{
+              padding: '24px',
+              background: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)',
+              border: 'none',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              textAlign: 'left',
+              color: 'white',
+              boxShadow: '0 4px 12px rgba(168, 85, 247, 0.2)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(168, 85, 247, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(168, 85, 247, 0.2)';
+            }}
+          >
+            <div style={{ fontSize: '32px', marginBottom: '12px' }}>📝</div>
+            <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+              Submit Daily Log
+            </div>
+            <div style={{ fontSize: '14px', opacity: 0.9 }}>
+              Record today's site work, manpower, and equipment
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate?.('MB Entry')}
+            style={{
+              padding: '24px',
+              background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+              border: 'none',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              textAlign: 'left',
+              color: 'white',
+              boxShadow: '0 4px 12px rgba(236, 72, 153, 0.2)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(236, 72, 153, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(236, 72, 153, 0.2)';
+            }}
+          >
+            <div style={{ fontSize: '32px', marginBottom: '12px' }}>📐</div>
+            <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+              Create MB Entry
+            </div>
+            <div style={{ fontSize: '14px', opacity: 0.9 }}>
+              Record site measurements and quantities
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate?.('Progress')}
+            style={{
+              padding: '24px',
+              background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+              border: 'none',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              textAlign: 'left',
+              color: 'white',
+              boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.2)';
+            }}
+          >
+            <div style={{ fontSize: '32px', marginBottom: '12px' }}>📊</div>
+            <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+              View Progress
+            </div>
+            <div style={{ fontSize: '14px', opacity: 0.9 }}>
+              Check work progress and submissions
+            </div>
+          </button>
+        </>
+      ) : (
+        // Contractor Quick Actions (keep existing code)
+        <>
+          {/* Your existing contractor quick actions */}
+        </>
+      )}
+    </div>
+  </div>
+)}
+        {/* Quick Actions Section - Only for CONTRACTOR */}
+        {role === 'CONTRACTOR' && (
+          <div style={{
+            background: 'white',
+            borderRadius: '20px',
+            padding: '28px',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            border: '1px solid #e2e8f0',
+            marginBottom: '32px'
+          }}>
+            <h3 style={{
+              margin: '0 0 24px 0',
+              color: '#1e293b',
+              fontSize: '20px',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              <div style={{
+                width: '4px',
+                height: '24px',
+                background: 'linear-gradient(180deg, #14b8a6, #0d9488)',
+                borderRadius: '4px'
+              }} />
+              Quick Actions
+            </h3>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '20px'
+            }}>
+              {/* Submit Daily Log */}
+              <button
+                onClick={() => onNavigate?.('Daily Logs')}
+                style={{
+                  padding: '24px',
+                  background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                  border: 'none',
+                  borderRadius: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textAlign: 'left',
+                  color: 'white',
+                  boxShadow: '0 4px 12px rgba(139, 92, 246, 0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(139, 92, 246, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.2)';
+                }}
+              >
+                <div style={{ fontSize: '32px', marginBottom: '12px' }}>📝</div>
+                <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+                  Submit Daily Log
+                </div>
+                <div style={{ fontSize: '14px', opacity: 0.9 }}>
+                  Record today's work progress, manpower, and equipment
+                </div>
+              </button>
+
+              {/* Submit Progress/Bill */}
+              <button
+                onClick={() => onNavigate?.('Progress')}
+                style={{
+                  padding: '24px',
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                  border: 'none',
+                  borderRadius: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textAlign: 'left',
+                  color: 'white',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.2)';
+                }}
+              >
+                <div style={{ fontSize: '32px', marginBottom: '12px' }}>📊</div>
+                <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+                  Update Progress & Submit Bill
+                </div>
+                <div style={{ fontSize: '14px', opacity: 0.9 }}>
+                  Report work progress and submit running account bills
+                </div>
+              </button>
+
+              {/* Upload Quality Test */}
+              <button
+                onClick={() => onNavigate?.('Quality')}
+                style={{
+                  padding: '24px',
+                  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                  border: 'none',
+                  borderRadius: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textAlign: 'left',
+                  color: 'white',
+                  boxShadow: '0 4px 12px rgba(245, 158, 11, 0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(245, 158, 11, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.2)';
+                }}
+              >
+                <div style={{ fontSize: '32px', marginBottom: '12px' }}>🧪</div>
+                <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+                  Upload Quality Test Result
+                </div>
+                <div style={{ fontSize: '14px', opacity: 0.9 }}>
+                  Submit material and quality test certificates
+                </div>
+              </button>
+
+              {/* Submit Compliance */}
+              <button
+                onClick={() => onNavigate?.('Compliance')}
+                style={{
+                  padding: '24px',
+                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                  border: 'none',
+                  borderRadius: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textAlign: 'left',
+                  color: 'white',
+                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(16, 185, 129, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.2)';
+                }}
+              >
+                <div style={{ fontSize: '32px', marginBottom: '12px' }}>✅</div>
+                <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>
+                  Submit Compliance Report
+                </div>
+                <div style={{ fontSize: '14px', opacity: 0.9 }}>
+                  Upload safety, environmental, and social compliance
+                </div>
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Charts Grid */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns:
-              viewMode === "detailed" ? "1fr" : "repeat(auto-fit, minmax(500px, 1fr))",
+              viewMode === "detailed"
+                ? "1fr"
+                : "repeat(auto-fit, minmax(500px, 1fr))",
             gap: "24px",
             marginBottom: "32px",
           }}
@@ -783,16 +1282,15 @@ export default function Dashboard({ role }: { role: Role }) {
                     fill="url(#colorFinancial)"
                   />
                   {"target" in content.progressData[0] && (
-  <Line
-    type="monotone"
-    dataKey="target"
-    stroke="#f59e0b"
-    strokeWidth={2}
-    strokeDasharray="5 5"
-    dot={false}
-  />
-)}
-
+                    <Line
+                      type="monotone"
+                      dataKey="target"
+                      stroke="#f59e0b"
+                      strokeWidth={2}
+                      strokeDasharray="5 5"
+                      dot={false}
+                    />
+                  )}
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -838,9 +1336,8 @@ export default function Dashboard({ role }: { role: Role }) {
                     cy="50%"
                     labelLine={false}
                     label={({ name, percent }) =>
-  `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`
-}
-
+                      `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`
+                    }
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
@@ -922,7 +1419,9 @@ export default function Dashboard({ role }: { role: Role }) {
                       fontWeight: "600",
                     }}
                   />
-                  <Legend wrapperStyle={{ color: "#64748b", fontWeight: "600" }} />
+                  <Legend
+                    wrapperStyle={{ color: "#64748b", fontWeight: "600" }}
+                  />
                   <Bar
                     dataKey={Object.keys(content.corridorData[0])[1]}
                     fill="#3b82f6"
@@ -933,7 +1432,9 @@ export default function Dashboard({ role }: { role: Role }) {
                     fill="#10b981"
                     radius={[8, 8, 0, 0]}
                   />
-                  {(content.corridorData[0] as any)[Object.keys(content.corridorData[0])[3]] !== undefined && (
+                  {(content.corridorData[0] as any)[
+                    Object.keys(content.corridorData[0])[3]
+                  ] !== undefined && (
                     <Bar
                       dataKey={Object.keys(content.corridorData[0])[3]}
                       fill="#f59e0b"
@@ -1115,7 +1616,8 @@ export default function Dashboard({ role }: { role: Role }) {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateX(4px)";
-                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(0,0,0,0.1)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateX(0)";

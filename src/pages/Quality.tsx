@@ -177,7 +177,7 @@ export default function Quality({ role }: { role: Role }) {
 
   // Quality Certifications
   const qualityCertificates = [
-    { certNo: 'QC-2024-128', workType: 'Earthwork - Package 1', chainage: 'CH 0 to 5 km', certifiedBy: 'Authority Engineer', date: '2026-01-25', status: 'Issued' },
+    { certNo: 'QC-2024-128', workType: 'Earthwork - Tender 1', chainage: 'CH 0 to 5 km', certifiedBy: 'Authority Engineer', date: '2026-01-25', status: 'Issued' },
     { certNo: 'QC-2024-129', workType: 'Subgrade Preparation', chainage: 'CH 5 to 8 km', certifiedBy: 'AE - Site A', date: '2026-01-28', status: 'Issued' },
     { certNo: 'QC-2024-130', workType: 'Base Course Construction', chainage: 'CH 2 to 3 km', certifiedBy: 'Authority Engineer', date: '2026-01-27', status: 'Issued' },
   ];
